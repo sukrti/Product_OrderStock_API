@@ -1,5 +1,6 @@
 ﻿using APIBusinessLogic;
 using APIBusinessLogic.Stocks.Contracts;
+using APIEntities.StockEntity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -28,7 +29,7 @@ namespace API_WebApplication.Controllers
         /// <returns>HTTPResponseMessage</returns>
 
         [HttpPut]
-        public async Task<HttpResponseMessage> UpdateStockData(string productnumber)
+        public async Task<HttpResponseMessage> UpdateStockData(ProductStockDetails productstock)
         {
             try
             {
@@ -37,7 +38,7 @@ namespace API_WebApplication.Controllers
 
                 // Sendind productnumber,stock and config settings to the Business logic to update the stock
                 if (config != null)
-                    return await _service.UpdateProductStock(productnumber, 25, config.BaseUrl, config.StockAPI, config.ApiKey);
+                    return await _service.UpdateProductStock(productstock.MerchantProductNo, 25, config.BaseUrl, config.StockAPI, config.ApiKey);
                 else
                     return null;
             }

@@ -1,15 +1,27 @@
-﻿input[type='submit'], button, [aria-label] {
-    cursor: pointer;
+﻿@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+    background-color: mistyrose;
+    color: white;
 }
 
-#editForm {
-    display: none;
+span#btndiv {
+    margin-left: 20px;
+}
+
+.clselements {
+    display: inline-flex;
+}
+
+tbody {
+    color: sienna;
 }
 
 table {
     font-family: Arial, sans-serif;
-    border: 1px solid;
-    border-collapse: collapse;
+    border: 2px solid white;
+    color: white;
+    background-color: salmon;
 }
 
 th {
@@ -20,20 +32,28 @@ th {
 td {
     border: 1px solid;
     padding: 5px;
+    color: white;
 }
 
 .container {
     padding: 2rem 0rem;
+    color: white;
 }
 
-h4 {
-    margin: 2rem 0rem 1rem;
+#btndiv {
+    background-color: slategray;
 }
 
-.table-image {
-    td, th
-
-{
-    vertical-align: middle;
+.products {
+    padding: 8px 12px;
+    color: firebrick;
+    background-color: whitesmoke;
+    border: 1px solid burlywood;
+    cursor: pointer;
+    border-radius: 5px;
 }
+
+h3 {
+    font-family: 'Open Sans',serif;
+    color: sienna;
 }
