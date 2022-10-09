@@ -11,25 +11,28 @@ namespace API_ConsoleApplication.ProductStock
     public class ProductStockHandler
     {
         /// <summary>
-        /// send the required information to business layer service to update stock
+        /// Send the required information to business layer service to update stock
         /// </summary>
-        /// <param name="productstockservice"></param>
-        /// <param name="config"></param>
-        /// <param name="productnumber"></param>
-        /// <returns></returns>
-        public static async Task ProductUpdateStockDetails(IProductStockService productstockservice, APIConfigDetails config,string productnumber)
+        /// <param name="productstockservice">IProductStockService</param>
+        /// <param name="config">APIConfigDetails</param>
+        /// <param name="productnumber">string</param>
+        /// <returns>Task</returns>
+        public static async Task ProductUpdateStockDetails(IProductStockService productstockservice, APIConfigDetails config, string productnumber)
         {
             try
             {
-                
                 await productstockservice.UpdateProductStock(productnumber, 25, config.BaseUrl, config.StockAPI, config.ApiKey);
 
                 System.Console.WriteLine("Stock of product number " + productnumber + " is updated to 25");
+
+                Console.WriteLine();
+
+                System.Console.WriteLine("Press any key to exit...");
             }
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                
+                Console.WriteLine("Something went wrong while updating the stock " + ex.Message);
             }
         }
     }

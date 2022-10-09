@@ -22,10 +22,13 @@ namespace API_ConsoleApplication
             _configuration = configuration;
             _productstockservice = productstockservice;
         }
+        /// <summary>
+        /// Starts the main logic to call the business logic services for API
+        /// </summary>
+        /// <returns></returns>
         public async Task RunAsync()
         {
             string productnumber = string.Empty;
-
             try
             {
                 //Getting the config details
@@ -39,9 +42,10 @@ namespace API_ConsoleApplication
                 if (!string.IsNullOrEmpty(productnumber))
                     await ProductStockHandler.ProductUpdateStockDetails(_productstockservice, config, productnumber);
             }
+
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Something went wrong!"+ex.Message);
             }
 
         }

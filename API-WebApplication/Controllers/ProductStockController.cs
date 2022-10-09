@@ -33,16 +33,20 @@ namespace API_WebApplication.Controllers
             try
             {
                 // Taking all the necessary configurations settings
-                var config = _config.GetSection("APIConfigurations").Get<APIConfigDetails>();
+                APIConfigDetails config = _config.GetSection("APIConfigurations").Get<APIConfigDetails>();
 
                 // Sendind productnumber,stock and config settings to the Business logic to update the stock
-                return await _service.UpdateProductStock(productnumber, 25, config.BaseUrl, config.StockAPI, config.ApiKey);
-            }
-            catch (Exception)
-            {
-                return null;
+                if (config != null)
+                    return await _service.UpdateProductStock(productnumber, 25, config.BaseUrl, config.StockAPI, config.ApiKey);
+                else
+                    return null;
             }
 
+            catch (Exception)
+            {
+                // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
+                return null;
+            }
         }
     }
 }

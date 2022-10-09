@@ -17,34 +17,37 @@ namespace APIBusinessLogic.Orders
     public class ProductOrderServices : IProductOrderService
     {
         /// <summary>
-        /// This method fetches all the orders from API that is in IN_PROGRESS  status
+        /// This method fetches "All" the orders from API that are in IN_PROGRESS  status
         /// </summary>
         /// <param name="Statuses">List<Product_Statuses></param>
         /// <param name="BaseUrl">string</param>
         /// <param name="OrderApi">string</param>
         /// <param name="apikey"></param>
-        /// <returns>var</returns>
+        /// <returns>HttpResponseMessage</returns>
         public async Task<Product_CollectionOfReponses> GetOrdersByStatus(List<Product_Statuses> Statuses, string BaseUrl, string OrderApi, string apikey)
         {
-            HttpResponseMessage results=null;
+            HttpResponseMessage results = null;
             try
             {
-                //Creat http client object
+                //Create http client object
                 HttpClient client = new HttpClient();
 
+                //Make a dictionary obj that takes data of Apikey and Statuses
                 Dictionary<string, string> record = new Dictionary<string, string>()
                 {
                     ["apikey"] = apikey,
                     ["statuses"] = Statuses.FirstOrDefault().ToString()
                 };
 
+                //call the API to fetch records
                 results = await client.GetAsync(QueryHelpers.AddQueryString(BaseUrl + OrderApi, record));
                 results.EnsureSuccessStatusCode();
             }
 
-            catch(Exception ex)
+            catch (HttpRequestException ex)
             {
-
+                // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
+                throw new Exception("Error occurred while fetching the data from the API:"+ ex.Message);
             }
 
             return JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) != null ?
@@ -52,15 +55,15 @@ namespace APIBusinessLogic.Orders
         }
 
         /// <summary>
-        /// 
+        /// This method takes the status and config details and returns the top 5 order records 
         /// </summary>
         /// <param name="statuses">List<Product_Statuses></param>
         /// <param name="baseUrl">string</param>
         /// <param name="OrderApi">string</param>
         /// <param name="apikey">string</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable<ProductOrderDetails></returns>
         public async Task<IEnumerable<ProductOrderDetails>> GetAllInProgressProducts(List<Product_Statuses> statuses, string baseUrl,
-            string OrderApi, string apikey)
+        string OrderApi, string apikey)
         {
             try
             {
@@ -71,13 +74,12 @@ namespace APIBusinessLogic.Orders
                     return GetTopFiveRecords(order_inprogress_details);
                 else
                     return null;
-
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw ex;
+                // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
+                return null;
             }
         }
 
@@ -85,7 +87,7 @@ namespace APIBusinessLogic.Orders
         /// This method fetches the top 5 records from the data
         /// </summary>
         /// <param name="responses">Product_CollectionOfReponses</param>
-        /// <returns></returns>
+        /// <returns>IEnumerable<ProductOrderDetails></returns>
         public IEnumerable<ProductOrderDetails> GetTopFiveRecords(Product_CollectionOfReponses responses)
         {
             try
@@ -103,7 +105,9 @@ namespace APIBusinessLogic.Orders
 
             catch (Exception ex)
             {
-                throw ex;
+                // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
+                throw new Exception("Something went wrong while fetching top 5 records:" + ex.Message);
+                
             }
         }
     }
