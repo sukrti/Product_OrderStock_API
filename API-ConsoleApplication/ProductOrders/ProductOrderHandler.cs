@@ -28,24 +28,37 @@ namespace API_ConsoleApplication
             string productNumber = string.Empty;
             try
             {
-                var topfiveorders = await productorderservice.GetAllInProgressProducts(new List<Product_Statuses> { Product_Statuses.IN_PROGRESS },
-                    config.BaseUrl, config.OrderAPI, config.ApiKey);
-
-                PrintTopFiveProductsOnConsole(topfiveorders.ToArray());
-
-                while (true)
+                // Make request to service 
+                if (config != null)
                 {
-                    Console.WriteLine("Select a product number to update its stock to 25:");
-                    productNumber = Console.ReadLine();
-                    if (topfiveorders.Any(c => c.ProductNumber == productNumber)) break;
-                    Console.WriteLine("Product not exists!");
-                }
+                    IEnumerable<ProductOrderDetails> topfiveorders = await productorderservice.GetAllInProgressProducts(new List<Product_Statuses> { Product_Statuses.IN_PROGRESS },
+                     config.BaseUrl, config.OrderAPI, config.ApiKey);
 
+
+                    //print top 5 records 
+                    PrintTopFiveProductsOnConsole(topfiveorders.ToArray());
+
+                    //Ask user to choose the product number 
+                    while (true)
+                    {
+                        Console.WriteLine("Select a product number to update its stock to 25:");
+                        productNumber = Console.ReadLine();
+                        if (topfiveorders.Any(c => c.ProductNumber == productNumber)) break;
+                        Console.WriteLine("Product not exists!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Error occurred !! Press any key to exit...");
+                }
+                
             }
+
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Something went wrong while fetching the records " + ex.Message);
             }
+
             return productNumber;
         }
 
@@ -70,9 +83,10 @@ namespace API_ConsoleApplication
 
                 table.Write();
             }
+
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("Something went wrong:"+ex.Message);
             }
         }
     }
