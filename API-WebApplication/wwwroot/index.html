@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        ChannelEngine Assessment
+    </title>
+    <link rel="stylesheet" href="css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="css/fa/css/fa.all.min.css" rel="stylesheet" />
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/site.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <!-- here goes our data! -->
+                <!--</table>-->
+                <table id="html-data-table" class="table table-striped">
+                    <tr>
+                        <th>Product Number</th>
+                        <th>GTIN</th>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+    <div class="dropdown">
+        <!-- here goes dropdown! -->
+        <select id="productnumber-dropdown" onchange="myChange()" class="country" name="locality"></select>
+        </div>
+        <!-- here goes button to update! -->
+        <div id="btndiv">
+            <button id="mybtn" type="button" onclick="myFunction()" class="btn btn-primary btnUpdateStockCall">Update</button>
+        </div>
+    </div>
+    <script type="text/javascript">getTopFiveOrderData();</script>
+</body>
+</html>
