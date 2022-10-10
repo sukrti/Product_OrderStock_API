@@ -51,14 +51,12 @@ namespace API_ConsoleApplication
                 {
                     Console.WriteLine("Error occurred !! Press any key to exit...");
                 }
-
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine("Something went wrong while fetching the records " + ex.Message);
             }
-
             return productNumber;
         }
 

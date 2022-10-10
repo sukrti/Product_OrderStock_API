@@ -7,7 +7,7 @@ using APIBusinessLogic.Stocks.Contracts;
 namespace API_ConsoleApplication.ProductStock
 {
     /// <summary>
-    /// This class send the required information to business layer service to update  the stock
+    /// This class send calls service layer to update  the stock
     /// </summary>
     public class ProductStockHandler
     {

@@ -10,9 +10,11 @@ using APIBusinessLogic.Stocks.Contracts;
 
 namespace API_ConsoleApplication
 {
+    /// <summary>
+    /// This class is the main entry point of the application
+    /// </summary>
     class program
     {
-
         /// <summary>
         /// Execution starts from Main
         /// </summary>
@@ -51,15 +53,3 @@ namespace API_ConsoleApplication
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

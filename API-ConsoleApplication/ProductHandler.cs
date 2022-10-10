@@ -29,6 +29,7 @@ namespace API_ConsoleApplication
         #endregion
 
         #region Methods
+
         /// <summary>
         /// Starts the main logic to call to services for API
         /// </summary>
@@ -55,6 +56,7 @@ namespace API_ConsoleApplication
                 Console.WriteLine("Something went wrong!" + ex.Message);
             }
         }
+
         #endregion
     }
 }
