@@ -51,7 +51,7 @@ namespace APIBusinessLogic.Orders
             }
 
             return JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) != null ?
-             JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) : null;
+            JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) : null;
         }
 
         /// <summary>

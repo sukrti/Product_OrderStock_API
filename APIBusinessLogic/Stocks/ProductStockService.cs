@@ -9,7 +9,6 @@ using APIEntities.StockEntity;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 
-
 namespace APIBusinessLogic.Stocks
 {
     /// <summary>
@@ -53,7 +52,7 @@ namespace APIBusinessLogic.Stocks
                 if (requestContent != null)
                     response = await httpClient.PutAsync(Path.Combine(QueryHelpers.AddQueryString(baseUrl + stockApi, record)), requestContent);
                response.EnsureSuccessStatusCode();
-                return response;
+               return response;
             }
 
             catch (HttpRequestException ex)

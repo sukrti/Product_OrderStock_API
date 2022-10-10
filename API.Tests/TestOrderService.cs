@@ -1,19 +1,17 @@
 using APIBusinessLogic.Orders;
-using APIBusinessLogic.Orders.Contracts;
 using APIEntities.OrdersEntity;
 using Bogus;
 using Moq;
-using Newtonsoft.Json;
-using System.IO;
 using System.Linq;
 using Xunit;
 
 namespace API.Tests
 {
+    /// <summary>
+    ///  The class is created for the Unit tests
+    /// </summary>
     public class TestOrderService
     {
-        private readonly IProductOrderService _orderService;
-
         [Fact]
         public void GetTopFiveOrdersRecord_ShouldReturn_CountFive()
         {
@@ -24,6 +22,10 @@ namespace API.Tests
             Assert.InRange(productOrderServices.Object.GetTopFiveRecords(GetRecords()).Count(), 0, 5);
         }
 
+        /// <summary>
+        /// This method creats fake information data to be used in unit testing
+        /// </summary>
+        /// <returns>Product_CollectionOfReponses</returns>
         private Product_CollectionOfReponses GetRecords()
         {
             var lineFaker = new Faker<Products_LineDetails>()
@@ -39,7 +41,6 @@ namespace API.Tests
                .RuleFor(x => x.Content, c => contentFaker.Generate(100));
 
             return Product_CollectionOfReponses;
-
         }
     }
 }
