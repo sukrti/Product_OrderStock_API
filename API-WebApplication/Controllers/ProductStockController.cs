@@ -9,6 +9,10 @@ using APIEntities.StockEntity;
 
 namespace API_WebApplication.Controllers
 {
+    /// <summary>
+    /// ProductStockController declaration
+    /// </summary>
+    
     [ApiController]
     [Route("api/v1/[controller]/[action]")]
     public class ProductStockController : ControllerBase
@@ -29,8 +33,7 @@ namespace API_WebApplication.Controllers
         #region HTTP Requests
 
         /// <summary>
-        /// This method updates the current stock number to 25.It accepts productnumber from the user
-        /// which is to update
+        /// This method updates the stock
         /// </summary>
         /// <returns>HTTPResponseMessage</returns>
 

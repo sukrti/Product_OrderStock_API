@@ -27,9 +27,10 @@ namespace API_ConsoleApplication
             string productNumber = string.Empty;
             try
             {
-                // Make request to service 
+
                 if (config != null)
                 {
+                    // Make request to service 
                     IEnumerable<ProductOrderDetails> topfiveorders = await productorderservice.GetAllInProgressProducts(new List<Product_Statuses> { Product_Statuses.IN_PROGRESS },
                      config.BaseUrl, config.OrderAPI, config.ApiKey);
 
@@ -41,7 +42,8 @@ namespace API_ConsoleApplication
                     {
                         Console.WriteLine("Select a product number to update its stock to 25:");
                         productNumber = Console.ReadLine();
-                        if (topfiveorders.Any(c => c.ProductNumber == productNumber)) break;
+                        if (topfiveorders.Any(c => c.ProductNumber == productNumber))
+                            break;
                         Console.WriteLine("Product not exists!");
                     }
                 }
@@ -49,7 +51,7 @@ namespace API_ConsoleApplication
                 {
                     Console.WriteLine("Error occurred !! Press any key to exit...");
                 }
-                
+
             }
 
             catch (Exception ex)
@@ -69,22 +71,18 @@ namespace API_ConsoleApplication
             try
             {
                 var table = new ConsoleTable();
-
                 IEnumerable<string> alldetails = ProductOrderDetails.GetProductData();
-
                 table.AddColumn(alldetails);
-
                 foreach (var orders in topProducts)
                 {
                     table.AddRow(orders.ProductNumber, orders.Gtin, orders.Quantity, orders.Description);
                 }
-
                 table.Write();
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong:"+ex.Message);
+                Console.WriteLine("Something went wrong:" + ex.Message);
             }
         }
     }
