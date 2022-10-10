@@ -1,13 +1,14 @@
-﻿using APIBusinessLogic.Stocks.Contracts;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using APIBusinessLogic.Stocks.Contracts;
 using APIEntities.StockEntity;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace APIBusinessLogic.Stocks
 {
@@ -17,7 +18,7 @@ namespace APIBusinessLogic.Stocks
     public class ProductStockService : IProductStockService
     {
         /// <summary>
-        /// This method takes product number, stock, config details . Calls the API to update stock number.
+        /// This is the decalartion of a method that updates the product stock
         /// </summary>
         /// <param name="productNumber">string</param>
         /// <param name="stock">int</param>
@@ -49,12 +50,9 @@ namespace APIBusinessLogic.Stocks
                 };
 
                 StringContent requestContent = new StringContent(JsonConvert.SerializeObject(productstockdetails), Encoding.UTF8, "application/json");
-
                 if (requestContent != null)
                     response = await httpClient.PutAsync(Path.Combine(QueryHelpers.AddQueryString(baseUrl + stockApi, record)), requestContent);
-
-                response.EnsureSuccessStatusCode();
-
+               response.EnsureSuccessStatusCode();
                 return response;
             }
 
@@ -63,7 +61,6 @@ namespace APIBusinessLogic.Stocks
                 // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
                 throw new Exception("Error occurred while updating the stock number:" + ex.Message);
             }
-
         }
     }
 }

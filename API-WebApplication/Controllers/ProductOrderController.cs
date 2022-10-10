@@ -1,31 +1,37 @@
-﻿using APIBusinessLogic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using APIBusinessLogic;
 using APIBusinessLogic.Orders.Contracts;
 using APIEntities.Enums;
 using APIEntities.OrdersEntity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace API_WebApplication.Controllers
 {
     /// <summary>
-    /// This controller calls the business service to get and update the data through APIs
+    /// ProductOrderController decalartion
     /// </summary>
 
     [ApiController]
     [Route("api/v1/[controller]/[action]")]
     public class ProductOrderController : ControllerBase
     {
+        #region Fields
         private readonly IProductOrderService _service;
         private readonly IConfiguration _config;
+        #endregion
+
+        #region Constructor
         public ProductOrderController(IProductOrderService service, IConfiguration config)
         {
             _service = service;
             _config = config;
         }
+        #endregion
 
+        #region HTTP Requests
         /// <summary>
         /// This method fetches the top five orders whose status is in IN_PROGRESS
         /// </summary>
@@ -46,12 +52,13 @@ namespace API_WebApplication.Controllers
                 else
                     return null;
             }
-
+  
             catch (Exception)
             {
                 // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
                 return null;
             }
         }
+        #endregion
     }
 }

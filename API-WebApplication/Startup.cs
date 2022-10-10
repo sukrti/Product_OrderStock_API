@@ -1,23 +1,34 @@
-using APIBusinessLogic.Orders;
-using APIBusinessLogic.Orders.Contracts;
-using APIBusinessLogic.Stocks;
-using APIBusinessLogic.Stocks.Contracts;
+using GlobalExceptionHandling.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using APIBusinessLogic.Orders;
+using APIBusinessLogic.Stocks;
+using APIBusinessLogic.Orders.Contracts;
+using APIBusinessLogic.Stocks.Contracts;
 
 namespace API_WebApplication
 {
+    /// <summary>
+    /// This class sets up middleware and configure services
+    /// </summary>
     public class Startup
     {
+        #region Fields
         public IConfiguration Configuration { get; }
+        #endregion
+
+        #region Constructor
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+        #endregion
+
+        #region Methods
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -42,6 +53,7 @@ namespace API_WebApplication
             }
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
@@ -50,5 +62,6 @@ namespace API_WebApplication
                 endpoints.MapControllers();
             });
         }
+        #endregion
     }
 }

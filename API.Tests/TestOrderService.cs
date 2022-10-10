@@ -24,7 +24,7 @@ namespace API.Tests
             Assert.InRange(productOrderServices.Object.GetTopFiveRecords(GetRecords()).Count(), 0, 5);
         }
 
-        public Product_CollectionOfReponses GetRecords()
+        private Product_CollectionOfReponses GetRecords()
         {
             var lineFaker = new Faker<Products_LineDetails>()
                 .RuleFor(x => x.MerchantProductNo, faker => faker.Commerce.Product())
