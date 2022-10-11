@@ -1,10 +1,10 @@
-﻿using API_ConsoleApplication.ProductStock;
+﻿using System;
+using System.Threading.Tasks;
 using APIBusinessLogic;
+using API_ConsoleApplication.ProductStock;
 using APIBusinessLogic.Orders.Contracts;
 using APIBusinessLogic.Stocks.Contracts;
 using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
-using System;
 
 namespace API_ConsoleApplication
 {
@@ -13,19 +13,27 @@ namespace API_ConsoleApplication
     /// </summary>
     public class ProductHandler
     {
+        #region Fields
         private readonly IConfiguration _configuration;
         private readonly IProductOrderService _productorderservice;
         private readonly IProductStockService _productstockservice;
+        #endregion
+
+        #region Constructor
         public ProductHandler(IProductOrderService productorderservice, IProductStockService productstockservice, IConfiguration configuration)
         {
             _productorderservice = productorderservice;
             _configuration = configuration;
             _productstockservice = productstockservice;
         }
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Starts the main logic to call the business logic services for API
+        /// Starts the main logic to call to services for API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         public async Task RunAsync()
         {
             string productnumber = string.Empty;
@@ -45,10 +53,10 @@ namespace API_ConsoleApplication
 
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong!"+ex.Message);
+                Console.WriteLine("Something went wrong!" + ex.Message);
             }
-
         }
 
+        #endregion
     }
 }

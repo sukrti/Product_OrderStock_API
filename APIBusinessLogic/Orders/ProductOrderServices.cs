@@ -1,13 +1,13 @@
-﻿using APIBusinessLogic.Orders.Contracts;
-using APIEntities.Enums;
-using APIEntities.OrdersEntity;
-using Microsoft.AspNetCore.WebUtilities;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.WebUtilities;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
+using APIBusinessLogic.Orders.Contracts;
+using APIEntities.Enums;
+using APIEntities.OrdersEntity;
 
 namespace APIBusinessLogic.Orders
 {
@@ -47,11 +47,11 @@ namespace APIBusinessLogic.Orders
             catch (HttpRequestException ex)
             {
                 // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
-                throw new Exception("Error occurred while fetching the data from the API:"+ ex.Message);
+                throw new Exception("Error occurred while fetching the data from the API:" + ex.Message);
             }
 
             return JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) != null ?
-             JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) : null;
+            JsonConvert.DeserializeObject<Product_CollectionOfReponses>(await results.Content.ReadAsStringAsync()) : null;
         }
 
         /// <summary>
@@ -107,7 +107,6 @@ namespace APIBusinessLogic.Orders
             {
                 // logger can be used to log the exceptions with - _logger.LogError("something went wrong!"{ex})
                 throw new Exception("Something went wrong while fetching top 5 records:" + ex.Message);
-                
             }
         }
     }

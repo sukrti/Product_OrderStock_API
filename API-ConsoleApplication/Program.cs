@@ -1,59 +1,55 @@
-﻿using API_ConsoleApplication;
-using APIBusinessLogic.Orders;
-using APIBusinessLogic.Orders.Contracts;
-using APIBusinessLogic.Stocks;
-using APIBusinessLogic.Stocks.Contracts;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Threading.Tasks;
+using APIBusinessLogic.Orders;
+using APIBusinessLogic.Stocks;
+using APIBusinessLogic.Orders.Contracts;
+using APIBusinessLogic.Stocks.Contracts;
 
-class program
+namespace API_ConsoleApplication
 {
     /// <summary>
-    /// Main Entry point of the program . It creates host builder and calls RunAsunc() from ProductHandler 
+    /// This class is the main entry point of the application
     /// </summary>
-    /// <param name="args"></param>
-    public static void Main(string[] args)
+    class program
     {
-        IHost host = CreateHostBuilder(args).Build();
+        /// <summary>
+        /// Execution starts from Main
+        /// </summary>
+        /// <param name="args">string[]</param>
+        public static void Main(string[] args)
+        {
+            IHost host = CreateHostBuilder(args).Build();
 
-        ProductHandler services = ActivatorUtilities.CreateInstance<ProductHandler>(host.Services);
+            ProductHandler services = ActivatorUtilities.CreateInstance<ProductHandler>(host.Services);
 
-        Task task = services.RunAsync();
+            Task task = services.RunAsync();
+            task.Wait();
 
-        task.Wait(); 
+            Console.ReadLine();
+        }
 
-        Console.ReadLine();
-    }
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-        return Host.CreateDefaultBuilder(args)
-
+        /// <summary>
+        /// This is the declartion of a method that create hosts and configure services 
+        /// </summary>
+        /// <param name="args">string[]</param>
+        /// <returns>IHostBuilder</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((context, configuation) =>
             {
                 configuation.Sources.Clear();
                 configuation.AddJsonFile("Dev.appsettings.json", optional: true, reloadOnChange: true);
             })
-
             .ConfigureServices((context, services) =>
             {
                 services.AddScoped<IProductOrderService, ProductOrderServices>();
                 services.AddScoped<IProductStockService, ProductStockService>();
                 services.AddOptions();
             });
+        }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

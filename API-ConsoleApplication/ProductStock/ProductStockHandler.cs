@@ -1,12 +1,13 @@
-﻿using APIBusinessLogic;
-using APIBusinessLogic.Stocks.Contracts;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using APIBusinessLogic;
+using APIBusinessLogic.Stocks.Contracts;
+
 
 namespace API_ConsoleApplication.ProductStock
 {
     /// <summary>
-    /// This class send the required information to business layer service to update  the stock
+    /// This class send calls service layer to update  the stock
     /// </summary>
     public class ProductStockHandler
     {
@@ -24,9 +25,7 @@ namespace API_ConsoleApplication.ProductStock
                 await productstockservice.UpdateProductStock(productnumber, 25, config.BaseUrl, config.StockAPI, config.ApiKey);
 
                 System.Console.WriteLine("Stock of product number " + productnumber + " is updated to 25");
-
                 Console.WriteLine();
-
                 System.Console.WriteLine("Press any key to exit...");
             }
 

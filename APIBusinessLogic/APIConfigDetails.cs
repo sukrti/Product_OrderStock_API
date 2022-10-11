@@ -2,10 +2,11 @@
 namespace APIBusinessLogic
 {
     /// <summary>
-    /// This class carray all the required configurations that is required to call the APIs
+    /// This class carries required configurations required to call the APIs
     /// </summary>
     public class APIConfigDetails
     {
+        #region Properties
         public string BaseUrl { get; set; }
         public string OrderAPI { get; set; }
         public string StockAPI { get; set; }
@@ -14,5 +15,6 @@ namespace APIBusinessLogic
         {
             return new Tuple<string, string>("apiKey", ApiKey);
         }
+        #endregion
     }
 }
