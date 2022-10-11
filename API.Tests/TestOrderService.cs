@@ -1,4 +1,5 @@
 using APIBusinessLogic.Orders;
+using APIBusinessLogic.Orders.Contracts;
 using APIEntities.OrdersEntity;
 using Bogus;
 using Moq;
@@ -12,14 +13,17 @@ namespace API.Tests
     /// </summary>
     public class TestOrderService
     {
+        private readonly IProductOrderService _productorderService;
+        public TestOrderService(IProductOrderService productorderService)
+        {
+            _productorderService =  new ProductOrderServices();
+        }
         [Fact]
         public void GetTopFiveOrdersRecord_ShouldReturn_CountFive()
         {
             // Mock productOrderService class to test GetTopFiveRecords() method
-            var productOrderServices = new Mock<ProductOrderServices>();
-
-            // Pass if records count is not more than 5
-            Assert.InRange(productOrderServices.Object.GetTopFiveRecords(GetRecords()).Count(), 0, 5);
+            // Pass if records count is not more than 5            
+            Assert.InRange(_productorderService.GetTopFiveRecords(GetRecords()).Count(), 0, 5);
         }
 
         /// <summary>

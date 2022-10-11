@@ -1,59 +1,61 @@
-﻿@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+﻿@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+td, th {
+    padding: 5px
+}
+
+h3, tbody {
+    color: sienna
+}
 
 body {
-    background-color: mistyrose;
-    color: white;
+    background-color: #ffe4e1;
+    color: #fff
 }
 
 span#btndiv {
-    margin-left: 20px;
+    margin-left: 20px
 }
 
 .clselements {
-    display: inline-flex;
+    display: inline-flex
 }
 
-tbody {
-    color: sienna;
+.container, table, td {
+    color: #fff
 }
 
 table {
-    font-family: Arial, sans-serif;
-    border: 2px solid white;
-    color: white;
-    background-color: salmon;
+    font-family: Arial,sans-serif;
+    border: 2px solid #fff;
+    background-color: salmon
 }
 
 th {
-    background-color: #f8f8f8;
-    padding: 5px;
+    background-color: #f8f8f8
 }
 
 td {
-    border: 1px solid;
-    padding: 5px;
-    color: white;
+    border: 1px solid
 }
 
 .container {
-    padding: 2rem 0rem;
-    color: white;
+    padding: 2rem 0
 }
 
 #btndiv {
-    background-color: slategray;
+    background-color: #708090
 }
 
 .products {
     padding: 8px 12px;
-    color: firebrick;
-    background-color: whitesmoke;
-    border: 1px solid burlywood;
+    color: #b22222;
+    background-color: #f5f5f5;
+    border: 1px solid #deb887;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 5px
 }
 
 h3 {
-    font-family: 'Open Sans',serif;
-    color: sienna;
+    font-family: 'Open Sans',serif
 }
