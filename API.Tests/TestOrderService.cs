@@ -13,11 +13,17 @@ namespace API.Tests
     /// </summary>
     public class TestOrderService
     {
+        // Implemented dependency injection by mapping implemented class to the
+        // interface to call the testedmethod directly
+
         private readonly IProductOrderService _productorderService;
         public TestOrderService(IProductOrderService productorderService)
         {
             _productorderService =  new ProductOrderServices();
         }
+        /// <summary>
+        /// Test the outcome of the 5 records
+        /// </summary>
         [Fact]
         public void GetTopFiveOrdersRecord_ShouldReturn_CountFive()
         {
