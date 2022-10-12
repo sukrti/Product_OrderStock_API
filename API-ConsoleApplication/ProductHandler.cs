@@ -12,12 +12,12 @@ namespace API_ConsoleApplication
     /// </summary>
     public class ProductHandler
     {
-        #region Fields
+        #region Fields Declaration
         private readonly IProductOrderService _productorderservice;
         private readonly IProductStockService _productstockservice;
         #endregion
 
-        #region Constructor
+        #region Constructor Declaration
         public ProductHandler(IProductOrderService productorderservice, IProductStockService productstockservice)
         {
             _productorderservice = productorderservice;          
@@ -25,7 +25,7 @@ namespace API_ConsoleApplication
         }
         #endregion
 
-        #region Methods
+        #region Methods Declaration
 
         /// <summary>
         /// Starts the main logic to call to services for API

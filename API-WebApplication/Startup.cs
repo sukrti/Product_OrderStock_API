@@ -16,7 +16,7 @@ namespace API_WebApplication
     /// </summary>
     public class Startup
     {
-        #region Methods
+        #region Methods Declaration
 
         /// <summary>
         /// Configure services using dependency injection
@@ -48,6 +48,7 @@ namespace API_WebApplication
             }
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            // Global error handling middleware is set up
             app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
             app.UseHttpsRedirection();
             app.UseRouting();

@@ -7,7 +7,6 @@ using APIEntities.Enums;
 using APIEntities.OrdersEntity;
 using ConsoleTables;
 
-
 namespace API_ConsoleApplication
 {
     /// <summary>

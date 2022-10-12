@@ -6,7 +6,12 @@ using Bogus;
 using Xunit;
 
 namespace API.Tests
-{
+{    
+    /*Addition Comments: As it was asked to directly check the "top 5" functionality
+     that is implemented and hence the actual method was required to call. Its alternative is the TDD
+     approach where mocking is required */
+
+
     /// <summary>
     ///  The class is created for the Unit tests
     /// </summary>
