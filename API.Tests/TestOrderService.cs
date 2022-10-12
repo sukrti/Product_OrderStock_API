@@ -1,9 +1,8 @@
+using System.Linq;
 using APIBusinessLogic.Orders;
 using APIBusinessLogic.Orders.Contracts;
 using APIEntities.OrdersEntity;
 using Bogus;
-using Moq;
-using System.Linq;
 using Xunit;
 
 namespace API.Tests
@@ -13,22 +12,17 @@ namespace API.Tests
     /// </summary>
     public class TestOrderService
     {
-        // Implemented dependency injection by mapping implemented class to the
-        // interface to call the testedmethod directly
-
+        // Mapping implemented class (that contains method to be tested) with the interface
         private readonly IProductOrderService _productorderService;
         public TestOrderService(IProductOrderService productorderService)
         {
-            _productorderService =  new ProductOrderServices();
+            // Mapping 
+            _productorderService = new ProductOrderServices();
         }
-        /// <summary>
-        /// Test the outcome of the 5 records
-        /// </summary>
         [Fact]
         public void GetTopFiveOrdersRecord_ShouldReturn_CountFive()
         {
-            // Mock productOrderService class to test GetTopFiveRecords() method
-            // Pass if records count is not more than 5            
+            // Calling the actual method that returns "top 5" records
             Assert.InRange(_productorderService.GetTopFiveRecords(GetRecords()).Count(), 0, 5);
         }
 
