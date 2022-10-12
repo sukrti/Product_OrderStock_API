@@ -25,13 +25,13 @@ namespace API_ConsoleApplication.ProductStock
 
                 System.Console.WriteLine("Stock of product number " + productnumber + " is updated to 25");
                 Console.WriteLine();
-                System.Console.WriteLine("Press any key to exit...");
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("Something went wrong while updating the stock " + ex.Message);
+                Console.WriteLine("Something went wrong while updating the stock " + ex.Message);               
             }
+            Environment.Exit(0);
         }
     }
 }
