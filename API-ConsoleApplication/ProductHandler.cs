@@ -4,7 +4,6 @@ using APIBusinessLogic;
 using API_ConsoleApplication.ProductStock;
 using APIBusinessLogic.Orders.Contracts;
 using APIBusinessLogic.Stocks.Contracts;
-using Microsoft.Extensions.Configuration;
 
 namespace API_ConsoleApplication
 {
@@ -14,16 +13,14 @@ namespace API_ConsoleApplication
     public class ProductHandler
     {
         #region Fields
-        private readonly IConfiguration _configuration;
         private readonly IProductOrderService _productorderservice;
         private readonly IProductStockService _productstockservice;
         #endregion
 
         #region Constructor
-        public ProductHandler(IProductOrderService productorderservice, IProductStockService productstockservice, IConfiguration configuration)
+        public ProductHandler(IProductOrderService productorderservice, IProductStockService productstockservice)
         {
-            _productorderservice = productorderservice;
-            _configuration = configuration;
+            _productorderservice = productorderservice;          
             _productstockservice = productstockservice;
         }
         #endregion
@@ -39,16 +36,11 @@ namespace API_ConsoleApplication
             string productnumber = string.Empty;
             try
             {
-                //Getting the config details
-                APIConfigDetails config = _configuration.GetSection("APIConfigurations").Get<APIConfigDetails>();
+                productnumber = await ProductOrderHandler.GetTopFiveProductOrderDetails(_productorderservice);
 
-                // Sendind status and config settings to the ProductOrderHandler service to fetch the orders from API
-                if (config != null)
-                    productnumber = await ProductOrderHandler.GetTopFiveProductOrderDetails(_productorderservice, config);
-
-                // Sendind productnumber,stock and config settings to the Business logic to update the stock
+                // Sendind productnumber,stock to the service to update the stock
                 if (!string.IsNullOrEmpty(productnumber))
-                    await ProductStockHandler.ProductUpdateStockDetails(_productstockservice, config, productnumber);
+                    await ProductStockHandler.ProductUpdateStockDetails(_productstockservice, productnumber);
             }
 
             catch (Exception ex)

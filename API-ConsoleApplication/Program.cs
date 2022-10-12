@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using APIBusinessLogic.Orders;
@@ -39,11 +38,6 @@ namespace API_ConsoleApplication
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
             return Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((context, configuation) =>
-            {
-                configuation.Sources.Clear();
-                configuation.AddJsonFile("Dev.appsettings.json", optional: true, reloadOnChange: true);
-            })
             .ConfigureServices((context, services) =>
             {
                 services.AddScoped<IProductOrderService, ProductOrderServices>();

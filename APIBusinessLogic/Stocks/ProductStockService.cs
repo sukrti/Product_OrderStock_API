@@ -25,8 +25,7 @@ namespace APIBusinessLogic.Stocks
         /// <param name="stockApi">string</param>
         /// <param name="apikey">string</param>
         /// <returns>HttpResponseMessage</returns>
-        public async Task<HttpResponseMessage> UpdateProductStock(string productNumber, int stock, string baseUrl, string stockApi,
-            string apikey)
+        public async Task<HttpResponseMessage> UpdateProductStock(string productNumber, int stock)
         {
             HttpResponseMessage response = null;
             try
@@ -45,12 +44,12 @@ namespace APIBusinessLogic.Stocks
                 //create a dictionary obj to pass the apikey
                 Dictionary<string, string> record = new Dictionary<string, string>()
                 {
-                    ["apikey"] = apikey,
+                    ["apikey"] = Constants.ApiKey,
                 };
 
                 StringContent requestContent = new StringContent(JsonConvert.SerializeObject(productstockdetails), Encoding.UTF8, "application/json");
                 if (requestContent != null)
-                    response = await httpClient.PutAsync(Path.Combine(QueryHelpers.AddQueryString(baseUrl + stockApi, record)), requestContent);
+                    response = await httpClient.PutAsync(Path.Combine(QueryHelpers.AddQueryString(Constants.BaseUrl + Constants.StockAPI, record)), requestContent);
                response.EnsureSuccessStatusCode();
                return response;
             }

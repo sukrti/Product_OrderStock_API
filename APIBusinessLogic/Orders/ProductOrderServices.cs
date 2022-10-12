@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.WebUtilities;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
-using APIBusinessLogic.Orders.Contracts;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using APIEntities.Enums;
 using APIEntities.OrdersEntity;
+using Microsoft.AspNetCore.WebUtilities;
+using APIBusinessLogic.Orders.Contracts;
 
 namespace APIBusinessLogic.Orders
 {
@@ -24,7 +24,7 @@ namespace APIBusinessLogic.Orders
         /// <param name="OrderApi">string</param>
         /// <param name="apikey"></param>
         /// <returns>HttpResponseMessage</returns>
-        public async Task<Product_CollectionOfReponses> GetOrdersByStatus(List<Product_Statuses> Statuses, string BaseUrl, string OrderApi, string apikey)
+        public async Task<Product_CollectionOfReponses> GetOrdersByStatus(List<Product_Statuses> Statuses)
         {
             HttpResponseMessage results = null;
             try
@@ -35,12 +35,12 @@ namespace APIBusinessLogic.Orders
                 //Make a dictionary obj that takes data of Apikey and Statuses
                 Dictionary<string, string> record = new Dictionary<string, string>()
                 {
-                    ["apikey"] = apikey,
+                    ["apikey"] = Constants.ApiKey,
                     ["statuses"] = Statuses.FirstOrDefault().ToString()
                 };
 
                 //call the API to fetch records
-                results = await client.GetAsync(QueryHelpers.AddQueryString(BaseUrl + OrderApi, record));
+                results = await client.GetAsync(QueryHelpers.AddQueryString(Constants.BaseUrl + Constants.OrderAPI, record));
                 results.EnsureSuccessStatusCode();
             }
 
@@ -55,20 +55,19 @@ namespace APIBusinessLogic.Orders
         }
 
         /// <summary>
-        /// This method takes the status and config details and returns the top 5 order records 
+        /// This method takes the status and returns the top 5 order records 
         /// </summary>
         /// <param name="statuses">List<Product_Statuses></param>
         /// <param name="baseUrl">string</param>
         /// <param name="OrderApi">string</param>
         /// <param name="apikey">string</param>
         /// <returns>IEnumerable<ProductOrderDetails></returns>
-        public async Task<IEnumerable<ProductOrderDetails>> GetAllInProgressProducts(List<Product_Statuses> statuses, string baseUrl,
-        string OrderApi, string apikey)
+        public async Task<IEnumerable<ProductOrderDetails>> GetAllInProgressProducts(List<Product_Statuses> statuses)
         {
             try
             {
                 //Calling Method to get all orders 
-                Product_CollectionOfReponses order_inprogress_details = await GetOrdersByStatus(statuses, baseUrl, OrderApi, apikey);
+                Product_CollectionOfReponses order_inprogress_details = await GetOrdersByStatus(statuses);
 
                 if (order_inprogress_details != null)
                     return GetTopFiveRecords(order_inprogress_details);

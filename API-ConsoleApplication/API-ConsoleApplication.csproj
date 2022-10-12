@@ -18,10 +18,4 @@
     <ProjectReference Include="..\APIBusinessLogic\APIBusinessLogic.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Dev.appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

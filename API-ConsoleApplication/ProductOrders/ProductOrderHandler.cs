@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using ConsoleTables;
-using APIBusinessLogic;
 using APIBusinessLogic.Orders.Contracts;
 using APIEntities.Enums;
 using APIEntities.OrdersEntity;
+using ConsoleTables;
+
 
 namespace API_ConsoleApplication
 {
@@ -20,19 +20,16 @@ namespace API_ConsoleApplication
         /// Sends required information to business layer service
         /// </summary>
         /// <param name="productorderservice">IProductOrderService</param>
-        /// <param name="config">APIConfigDetails</param>
         /// <returns>string</returns>
-        public static async Task<string> GetTopFiveProductOrderDetails(IProductOrderService productorderservice, APIConfigDetails config)
+        public static async Task<string> GetTopFiveProductOrderDetails(IProductOrderService productorderservice)
         {
             string productNumber = string.Empty;
             try
             {
-
-                if (config != null)
+                if (productorderservice != null)
                 {
                     // Make request to service 
-                    IEnumerable<ProductOrderDetails> topfiveorders = await productorderservice.GetAllInProgressProducts(new List<Product_Statuses> { Product_Statuses.IN_PROGRESS },
-                     config.BaseUrl, config.OrderAPI, config.ApiKey);
+                    IEnumerable<ProductOrderDetails> topfiveorders = await productorderservice.GetAllInProgressProducts(new List<Product_Statuses> { Product_Statuses.IN_PROGRESS });
 
                     //print top 5 records 
                     PrintTopFiveProductsOnConsole(topfiveorders.ToArray());

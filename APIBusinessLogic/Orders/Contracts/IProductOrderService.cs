@@ -13,14 +13,14 @@ namespace APIBusinessLogic.Orders.Contracts
         public IEnumerable<ProductOrderDetails> GetTopFiveRecords(Product_CollectionOfReponses responses);
 
         /// <summary>
-        /// This method takes the product status and configuration settings and returns product collection from API 
+        /// This method takes the product status and returns product collection from API 
         /// </summary>
-        public Task <Product_CollectionOfReponses> GetOrdersByStatus(List<Product_Statuses> statuses,string baseUrl, string OrderApi, string apikey);
+        public Task <Product_CollectionOfReponses> GetOrdersByStatus(List<Product_Statuses> statuses);
 
         /// <summary>
-        /// This method takes the product status and configuration settings and returns all the products that having In_Progress status
+        /// This method takes the product status and returns all the products that having In_Progress status
         /// </summary>
-        public Task <IEnumerable<ProductOrderDetails>> GetAllInProgressProducts(List<Product_Statuses> statuses, string baseUrl, string OrderApi, string apikey);
+        public Task <IEnumerable<ProductOrderDetails>> GetAllInProgressProducts(List<Product_Statuses> statuses);
         
     }
 }
