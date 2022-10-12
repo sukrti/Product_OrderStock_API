@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -17,17 +16,6 @@ namespace API_WebApplication
     /// </summary>
     public class Startup
     {
-        #region Fields
-        public IConfiguration Configuration { get; }
-        #endregion
-
-        #region Constructor
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-        #endregion
-
         #region Methods
 
         /// <summary>

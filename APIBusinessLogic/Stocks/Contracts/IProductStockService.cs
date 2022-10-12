@@ -8,6 +8,6 @@ namespace APIBusinessLogic.Stocks.Contracts
         /// <summary>
         /// Decalation of Method with required parameters to update stock
         /// </summary>
-        public Task<HttpResponseMessage> UpdateProductStock(string productNumber, int stock, string baseUrl, string stockApi, string apikey);
+        public Task<HttpResponseMessage> UpdateProductStock(string productNumber, int stock);
     }
 }
